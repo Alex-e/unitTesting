@@ -10,25 +10,47 @@ import java.util.HashMap;
 public class CheckConsoleOutput {
 
     /**
-     * @param stream               result of invoking the method
-     * @param refOutput            array of output strings to compare with
-     * @param outputInOrder        is output must be in order?
-     * @param timesRepeatOutput    how many times must be values repeated
+     * @param params
+     * @param outputResult
+     *
      */
-    public static String[] check(ByteArrayOutputStream stream, String[] refOutput,
-                                 boolean outputInOrder, int timesRepeatOutput) {
-        String s = stream.toString();
-        String[] realOutput = s.split("\\r?\\n");
-        // TODO TEST
-//        try {
-//            for (int i = 0; i < realOutput.length; i++) {
-//                System.out.print(realOutput[i] + " : ");
-//                System.out.print(refOutput[i] + "\r\n");
-//            }
-//        } catch (IndexOutOfBoundsException e) {
-//            System.err.println("\nINDEX OUT OF BONDS. JAMES BONDS.");
-//        }
+    public static String[] check(HashMap<String, String[]> params, ByteArrayOutputStream outputResult) {
 
+        // 1 FILE NAME OF THE CLASS
+        String fileName = params.get(String.valueOf(Param.file))[0];
+
+        //2 CHECK OUTPUT
+        String[] checkOutM = params.get(String.valueOf(Param.checkSysOut));
+        boolean checkOut;
+        if (checkOutM == null) {
+            checkOut = false;
+        } else {
+            checkOut = Boolean.valueOf(checkOutM[0]);
+        }
+
+        //3 ORDER OF STRINGS OF THE OUTPUT
+        String[] outputInOrderM = params.get(String.valueOf(Param.orderOut));
+        boolean outputInOrder;
+        if (outputInOrderM == null) {
+            outputInOrder = false;
+        } else {
+            outputInOrder = Boolean.valueOf(outputInOrderM[0]);
+        }
+
+        //4 REPEAT OUTPUT N TIMES
+        String[] timesRepeatOutputM = params.get(String.valueOf(Param.repeatOut));
+        int timesRepeatOutput;
+        if (timesRepeatOutputM == null) {
+            timesRepeatOutput = 1;
+        } else {
+            timesRepeatOutput = Integer.parseInt(timesRepeatOutputM[0]);
+        }
+        //5 OUTPUT TO COMPARE WITH
+        String[] refOutput = params.get(String.valueOf(Param.referenceOut));
+
+
+        String s = outputResult.toString();
+        String[] realOutput = s.split("\\r?\\n");
         boolean success;
 
         if (!outputInOrder || timesRepeatOutput > 1) {

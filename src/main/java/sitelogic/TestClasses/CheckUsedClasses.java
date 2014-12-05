@@ -5,13 +5,20 @@ import javassist.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by Ieromenko Alexandr on 28.11.2014.
  */
 public class CheckUsedClasses {
 
-    public static String [] checkForClasses(String fileName, String[] classesToCheck) {
+    public static String [] checkForClasses(HashMap<String, String[]> parameters) {
+        // 1 FILE NAME OF THE CLASS
+        String fileName = parameters.get(String.valueOf(Param.file))[0];
+
+        //11 CHECK CLASSES USED
+        String[] classesToCheck = parameters.get(String.valueOf(Param.usedClass));
+
         ClassPool cp = ClassPool.getDefault();
         Collection<String> classes = null;
         try {

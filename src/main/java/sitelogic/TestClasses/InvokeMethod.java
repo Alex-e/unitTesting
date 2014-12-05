@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 /**
  * Created by Ieromenko Alexandr on 28.11.2014.
@@ -16,14 +17,25 @@ public class InvokeMethod {
     /**
      * This method can invoke any One(1) method with any quantity of args of any type
      * and compare console output with given array of strings
-     *
-     * @param fileName              filename
-     * @param outputMethod          - name of the method to invoke
-     * @param outputMethodArgsClass - array of arguments classes
-     * @param consoleInput          - console input
+     * @param params
      */
-    public static ByteArrayOutputStream invoke(String fileName, String outputMethod, String[] outputMethodArgsClass,
-                                               String[] consoleInput) {
+    public static ByteArrayOutputStream invoke(HashMap<String, String[]> params) {
+
+        // 1 FILE NAME OF THE CLASS
+        String fileName = params.get(String.valueOf(Param.file))[0];
+
+        //7 NAME OF THE METHOD TO INVOKE
+        String[] methodName = params.get(String.valueOf(Param.methodName));
+
+        //8 CLASS OF THE ARGUMENTS
+        String[] outputMethodArgsClass = params.get(String.valueOf(Param.methodArgsClass));
+
+        //9 ARGUMENTS
+        String[] arguments = params.get(String.valueOf(Param.methodArgs));
+        //TODO fill this
+
+        //10 SYSTEM.IN
+        String[] consoleInput = params.get(String.valueOf(Param.systemIn));
 
         // CATCH CONSOLE OUTPUT
         PrintStream saveOut = System.out;  // save ref to sout
@@ -77,7 +89,7 @@ public class InvokeMethod {
             // TODO for construction classes that don`t have no args constructors
 //          Constructor<?> cons = testClass.getConstructor(new Class[]{});
             Object object = testClass.newInstance(); // instance of HashSetTask for method invocation
-            Method method = testClass.getMethod(outputMethod, argsTypes); // gain main
+            Method method = testClass.getMethod(methodName[0], argsTypes); // gain main
             //TODO what if method return something?
             Object result = method.invoke(object, args);
         } catch (ClassNotFoundException e) {
