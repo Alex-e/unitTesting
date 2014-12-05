@@ -1,5 +1,6 @@
 package sitelogic;
 
+import sitelogic.TestClasses.Param;
 import sitelogic.TestClasses.TestRunner;
 
 import java.util.HashMap;
@@ -10,35 +11,24 @@ import java.util.Map;
  */
 public class AlgorithmTaskTestRunner {
     public static void main(String[] args) {
-        HashMap<String, String[]> map = new HashMap<String, String[]>();
-        map.put("file", new String[] { "ioTesting.Task.AlgorithmTask" });
+        HashMap<Param, String[]> map = new HashMap<>();
+        map.put(Param.file, new String[] { "ioTesting.Task.AlgorithmTask" });
 
-        map.put("systemOut", new String []{"true"});
-        map.put("methodName", new String[] {"main"});
-        map.put("methodArgsClass", new String [] {"[Ljava.lang.String;"} );
-        //TODO write args values
-        map.put("methodArgs", new String[] {});
-        map.put("refOut", new String [] {"200"});
-        map.put("repeat", new String []{"1"});
-        map.put("order", new String []{"false"});
-        map.put("systemIn", new String [] {"1\n200\n3\n4\n5\n65\n7\n8\n9\n10\n11\n12\n13\n14\n15\n106\n" +
+        map.put(Param.methodName, new String [] {"main"});
+        map.put(Param.methodArgsClass, new String [] {"[Ljava.lang.String;"} );
+
+        map.put(Param.checkSysOut, new String []{"true"});
+        map.put(Param.referenceOut, new String [] {"200"});
+        map.put(Param.repeatOut, new String []{"1"});
+        map.put(Param.orderOut, new String []{"false"});
+        map.put(Param.systemIn, new String [] {"1\n200\n3\n4\n5\n65\n7\n8\n9\n10\n11\n12\n13\n14\n15\n106\n" +
                 "17\n18\n19\n20\n" });
 
-//        map.put("Class", new String []{"java.util.HashSet", "java.util.Iterator"});
-
+        // RUN TEST
         HashMap<String, String> result = TestRunner.testMethod(map);
+
         for (Map.Entry<String, String> pair : result.entrySet()) {
             System.out.println(pair.getKey() + " : " + pair.getValue());
         }
-        System.out.println("===============");
-        for (Map.Entry<String, String> pair : result.entrySet()) {
-            if (pair.getKey().equalsIgnoreCase("false")) {
-                System.out.println("Task not complete!");
-                System.out.print(pair.getValue());
-            } else {
-                System.out.println("Task complete!");
-            }
-        }
-
     }
 }

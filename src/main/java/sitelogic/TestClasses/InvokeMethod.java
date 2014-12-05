@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Ieromenko Alexandr on 28.11.2014.
@@ -19,23 +19,23 @@ public class InvokeMethod {
      * and compare console output with given array of strings
      * @param params
      */
-    public static ByteArrayOutputStream invoke(HashMap<String, String[]> params) {
+    public static ByteArrayOutputStream invoke(Map<Param, String[]> params) {
 
-        // 1 FILE NAME OF THE CLASS
-        String fileName = params.get(String.valueOf(Param.file))[0];
+        //  FILE NAME OF THE CLASS
+        String fileName = params.get(Param.file)[0];
 
-        //7 NAME OF THE METHOD TO INVOKE
-        String[] methodName = params.get(String.valueOf(Param.methodName));
+        // NAME OF THE METHOD TO INVOKE
+        String[] methodName = params.get(Param.methodName);
 
-        //8 CLASS OF THE ARGUMENTS
-        String[] outputMethodArgsClass = params.get(String.valueOf(Param.methodArgsClass));
+        // CLASS OF THE ARGUMENTS
+        String[] outputMethodArgsClass = params.get(Param.methodArgsClass);
 
-        //9 ARGUMENTS
-        String[] arguments = params.get(String.valueOf(Param.methodArgs));
+        // ARGUMENTS
+        String[] arguments = params.get(Param.methodArgs);
         //TODO fill this
 
-        //10 SYSTEM.IN
-        String[] consoleInput = params.get(String.valueOf(Param.systemIn));
+        // SYSTEM.IN
+        String[] consoleInput = params.get(Param.systemIn);
 
         // CATCH CONSOLE OUTPUT
         PrintStream saveOut = System.out;  // save ref to sout
@@ -53,7 +53,7 @@ public class InvokeMethod {
         Class[] argsTypes = null;
         Object[] args = null;
 
-        // if method has arguments
+        // if method has arguments fill args and argsTypes collections
         if (outputMethodArgsClass != null) {
 
             int numOfArgs = outputMethodArgsClass.length;
@@ -85,7 +85,7 @@ public class InvokeMethod {
 
         // invoke method
         try {
-            Class<?> testClass = Class.forName(fileName);// HashSetTask.class
+            Class<?> testClass = Class.forName(fileName); // HashSetTask.class
             // TODO for construction classes that don`t have no args constructors
 //          Constructor<?> cons = testClass.getConstructor(new Class[]{});
             Object object = testClass.newInstance(); // instance of HashSetTask for method invocation

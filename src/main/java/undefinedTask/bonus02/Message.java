@@ -1,4 +1,4 @@
-package undefined.bonus02;
+package undefinedTask.bonus02;
 
 public interface Message {
     void showWarning();

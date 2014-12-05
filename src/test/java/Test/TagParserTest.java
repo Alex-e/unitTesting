@@ -1,4 +1,4 @@
-package ioTesting.Test;
+package Test;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -48,7 +48,9 @@ public class TagParserTest extends Assert {
         System.setIn(is);
 
         //test data
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("\\tagParserTestResult.txt"), "UTF-8"));
+        BufferedReader reader = new BufferedReader(
+                                   new InputStreamReader(
+                                      new FileInputStream("\\tagParserTestResult.txt"), "UTF-8"));
         /*
         Содержимое файла -
         <span : HERE I GO! > SOME text</span>

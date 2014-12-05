@@ -1,4 +1,4 @@
-package undefined;
+package undefinedTask;
 
 /**
  * Created by Маша on 15.07.2014.

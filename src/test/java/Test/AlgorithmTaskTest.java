@@ -1,4 +1,4 @@
-package ioTesting.Test;
+package Test;
 
 import org.junit.After;
 import org.junit.Assert;

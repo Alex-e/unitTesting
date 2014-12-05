@@ -10,7 +10,7 @@ package reflectionTesting.Task;
 public class BeerTask {
     public static volatile Beer beer;
 
-    public static final void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
     }
 
     public interface Drink {

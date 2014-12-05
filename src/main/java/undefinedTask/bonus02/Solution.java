@@ -1,4 +1,4 @@
-package undefined.bonus02;
+package undefinedTask.bonus02;
 
 import java.io.BufferedReader;
 import java.io.IOException;

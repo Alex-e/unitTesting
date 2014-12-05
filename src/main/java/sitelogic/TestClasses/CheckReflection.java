@@ -4,19 +4,19 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Ieromenko Alexandr on 02.12.2014.
  */
 public class CheckReflection {
 
-    public static String[] checkRef(HashMap<String, String[]> params) {
+    public static String[] checkRef(Map<Param, String[]> params) {
 
-        // 1 FILE NAME OF THE CLASS
-        String fileName = params.get(String.valueOf(Param.file))[0];
+        //  FILE NAME OF THE CLASS
+        String fileName = params.get(Param.file)[0];
 
-        String[] reflectMethodName = params.get(String.valueOf(Param.reflectMethodName));
+        String[] reflectMethodName = params.get(Param.reflectMethodName);
         // get declared constructors
         // get declared classes
         // get declared fields
@@ -26,6 +26,8 @@ public class CheckReflection {
         // get interfaces
         // get superclass
         // TODO complete this!!
+
+        boolean success = false;
         try {
             Class<?> clazz = Class.forName(fileName);
 
@@ -58,6 +60,6 @@ public class CheckReflection {
             e.printStackTrace();
         }
 
-        return new String[] {"", ""};
+        return new String[] {"CheckReflection ok", "" + success};
     }
 }

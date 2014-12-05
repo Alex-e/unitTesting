@@ -1,4 +1,4 @@
-package undefined.bonus02;
+package undefinedTask.bonus02;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

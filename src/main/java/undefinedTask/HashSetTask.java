@@ -1,4 +1,4 @@
-package undefined;
+package undefinedTask;
 
 /* HashSet из растений
 Создать коллекцию HashSet с типом элементов String.
@@ -28,10 +28,5 @@ public class HashSetTask {
         for (String s : hashSet) {
             System.out.println(s);
         }
-    }
-
-    public static void print(String [] args, String rrr) {
-//        System.out.println("ARGS: " + Arrays.toString(args));
-        System.out.println("ARGS");
     }
 }

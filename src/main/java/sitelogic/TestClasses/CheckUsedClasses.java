@@ -5,19 +5,19 @@ import javassist.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Ieromenko Alexandr on 28.11.2014.
  */
 public class CheckUsedClasses {
 
-    public static String [] checkForClasses(HashMap<String, String[]> parameters) {
-        // 1 FILE NAME OF THE CLASS
-        String fileName = parameters.get(String.valueOf(Param.file))[0];
+    public static String [] checkForClasses(Map<Param, String[]> parameters) {
+        // FILE NAME OF THE CLASS
+        String fileName = parameters.get(Param.file)[0];
 
-        //11 CHECK CLASSES USED
-        String[] classesToCheck = parameters.get(String.valueOf(Param.usedClass));
+        // CHECK CLASSES USED
+        String[] classesToCheck = parameters.get(Param.usedClass);
 
         ClassPool cp = ClassPool.getDefault();
         Collection<String> classes = null;
@@ -38,16 +38,15 @@ public class CheckUsedClasses {
         String[] match = resultList.toArray(new String [classes.size()]);
         boolean compare = compareArrays(classesToCheck, match);
 
-        String message;
-        if (compare) {
-            message = "Every class is used";
-        } else {
-            message = "fail";
-        }
-
-        return new String [] {"CheckUsedClasses", message };
+        return new String [] {"CheckUsedClasses ok", "" + compare };
     }
 
+    /**
+     *
+     * @param classesToCheck
+     * @param resultList
+     * @return
+     */
     private static boolean compareArrays(String[] classesToCheck, String[] resultList) {
         int N = classesToCheck.length;
         int matches = 0;

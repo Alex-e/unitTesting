@@ -1,4 +1,4 @@
-package undefined;
+package undefinedTask;
 
 /* Каждый метод должен возвращать свой StackTrace
 Написать пять методов, которые вызывают друг друга. Каждый метод должен возвращать свой StackTrace.

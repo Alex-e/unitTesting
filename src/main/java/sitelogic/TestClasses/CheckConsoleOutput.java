@@ -2,6 +2,7 @@ package sitelogic.TestClasses;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Ieromenko Alexandr on 30.11.2014.
@@ -14,22 +15,10 @@ public class CheckConsoleOutput {
      * @param outputResult
      *
      */
-    public static String[] check(HashMap<String, String[]> params, ByteArrayOutputStream outputResult) {
+    public static String[] check(Map<Param, String[]> params, ByteArrayOutputStream outputResult) {
 
-        // 1 FILE NAME OF THE CLASS
-        String fileName = params.get(String.valueOf(Param.file))[0];
-
-        //2 CHECK OUTPUT
-        String[] checkOutM = params.get(String.valueOf(Param.checkSysOut));
-        boolean checkOut;
-        if (checkOutM == null) {
-            checkOut = false;
-        } else {
-            checkOut = Boolean.valueOf(checkOutM[0]);
-        }
-
-        //3 ORDER OF STRINGS OF THE OUTPUT
-        String[] outputInOrderM = params.get(String.valueOf(Param.orderOut));
+        // ORDER OF STRINGS OF THE OUTPUT
+        String[] outputInOrderM = params.get(Param.orderOut);
         boolean outputInOrder;
         if (outputInOrderM == null) {
             outputInOrder = false;
@@ -37,17 +26,17 @@ public class CheckConsoleOutput {
             outputInOrder = Boolean.valueOf(outputInOrderM[0]);
         }
 
-        //4 REPEAT OUTPUT N TIMES
-        String[] timesRepeatOutputM = params.get(String.valueOf(Param.repeatOut));
+        // REPEAT OUTPUT N TIMES
+        String[] timesRepeatOutputM = params.get(Param.repeatOut);
         int timesRepeatOutput;
         if (timesRepeatOutputM == null) {
             timesRepeatOutput = 1;
         } else {
             timesRepeatOutput = Integer.parseInt(timesRepeatOutputM[0]);
         }
-        //5 OUTPUT TO COMPARE WITH
-        String[] refOutput = params.get(String.valueOf(Param.referenceOut));
 
+        // OUTPUT TO COMPARE WITH
+        String[] refOutput = params.get(Param.referenceOut);
 
         String s = outputResult.toString();
         String[] realOutput = s.split("\\r?\\n");
@@ -59,7 +48,7 @@ public class CheckConsoleOutput {
             success = simpleMatcher(realOutput, refOutput);
         }
 
-        return new String[]{"CheckConsoleOutput", "" + success};
+        return new String[]{"CheckConsoleOutput ok", "" + success};
     }
 
     /**
@@ -76,7 +65,8 @@ public class CheckConsoleOutput {
 
     /**
      * this matcher is stable against duplicates in refOutput array.
-     * If there is any duplicates it will properly count them and then use in compare.
+     * If there is any duplicates it will properly count them and then
+     * use this information in comparing.
      *
      * @param realOutput
      * @param refOutput
